@@ -4,44 +4,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.core.io.ClassPathResource;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStream;
 import java.io.IOException;
+
 
 @Setter
 @Getter
 @AllArgsConstructor
-public class DataLoader {
+public class DataLoader <T> {
 
-    private String textFileLocation;
+    private final String textFileLocation;
+    private final Class<T> data;
 
-    private <T> T Load(Class <T> data){
+    public  T Load() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
 
-        StringBuilder textData= new StringBuilder();
-
-        try {
-            FileReader fileReader = new FileReader(this.textFileLocation);
-            BufferedReader reader = new BufferedReader(fileReader);
-            String line;
-
-            while ((line = reader.readLine())!=null){
-                textData.append(line).append("\n");
-            }
-
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        try (InputStream inputStream = new ClassPathResource(textFileLocation).getInputStream()) {
+            return objectMapper.readValue(inputStream, this.data);
         }
-
-
-        try {
-            return .
-        }
-
     }
 
 }

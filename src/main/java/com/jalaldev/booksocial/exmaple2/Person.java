@@ -1,9 +1,10 @@
+package com.jalaldev.booksocial.exmaple2;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
-import java.util.List;
-import java.time.ZonedDateTime;
+import java.time.Instant;
 
 @Data
 @NoArgsConstructor
@@ -11,10 +12,10 @@ import java.time.ZonedDateTime;
 public class Person {
     private String collectionId;
     private String collectionName;
-    private ZonedDateTime created;
+    private String  created;
     private String id;
     private String name;
-    private String position;  // Note: Fixed typo from "postion" to "position"
+    private String postion;
     private String salary;
-    private ZonedDateTime updated;
+    private String updated;
 }
